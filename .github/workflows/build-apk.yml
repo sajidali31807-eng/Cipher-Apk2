@@ -3,45 +3,73 @@ name: Build Cipher APK
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify Repository
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 -type f
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          distribution: 'temurin'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           validate-wrappers: false
 
+      - name: Verify Gradle Wrapper
+        run: |
+          ls -l gradlew
+          ls -l gradle/wrapper || true
+
+          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "ERROR: gradle-wrapper.jar is missing!"
+            exit 1
+          fi
+
+          file gradle/wrapper/gradle-wrapper.jar
+
       - name: Create gradle.properties
         run: |
-          echo "android.useAndroidX=true" >> gradle.properties
-          echo "android.enableJetifier=true" >> gradle.properties
-          echo "org.gradle.jvmargs=-Xmx2048m" >> gradle.properties
+          cat > gradle.properties <<EOF
+          android.useAndroidX=true
+          android.enableJetifier=true
+          org.gradle.jvmargs=-Xmx2048m
+          EOF
 
-      - name: Download Sherpa-ONNX AAR
+      - name: Download Sherpa-ONNX
         run: |
-          mkdir -p app/libs
-          wget -q "https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.10.30/sherpa-onnx-v1.10.30-android.tar.bz2"
+          wget -q https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.10.30/sherpa-onnx-v1.10.30-android.tar.bz2
           tar -xjf sherpa-onnx-v1.10.30-android.tar.bz2
-          find . -name "*.aar" | head -5
 
       - name: Install Sherpa-ONNX to Local Maven
         run: |
           mkdir -p ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30
+
           AAR=$(find . -name "*.aar" | head -1)
-          if [ -n "$AAR" ]; then
-            cp "$AAR" ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.aar
-            cat > ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.pom << 'EOF'
+
+          if [ -z "$AAR" ]; then
+            echo "No AAR found."
+            exit 1
+          fi
+
+          cp "$AAR" ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.aar
+
+          cat > ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.pom <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <project>
             <modelVersion>4.0.0</modelVersion>
@@ -51,18 +79,23 @@ jobs:
             <packaging>aar</packaging>
           </project>
           EOF
-            echo "AAR installed successfully"
+
+      - name: Add mavenLocal Repository
+        run: |
+          if grep -q "mavenLocal()" settings.gradle.kts; then
+            echo "mavenLocal already exists."
           else
-            echo "No AAR found in release"
+            sed -i '/repositories {/a\        mavenLocal()' settings.gradle.kts
           fi
 
-      - name: Add mavenLocal to settings
+      - name: Test Gradle Wrapper
         run: |
-          sed -i 's/repositories {/repositories {\n        mavenLocal()/' settings.gradle.kts
+          chmod +x gradlew
+          ./gradlew --version
 
       - name: Build Debug APK
         run: |
-          chmod +x gradlew
+          ./gradlew clean
           ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK
