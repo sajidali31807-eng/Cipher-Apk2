@@ -1,0 +1,68 @@
+name: Build Cipher APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Create gradle.properties
+        run: |
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx2048m" >> gradle.properties
+
+      - name: Download Sherpa-ONNX AAR
+        run: |
+          mkdir -p app/libs
+          wget -q "https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.10.30/sherpa-onnx-v1.10.30-android.tar.bz2"
+          tar -xjf sherpa-onnx-v1.10.30-android.tar.bz2
+          find . -name "*.aar" | head -5
+
+      - name: Install Sherpa-ONNX to Local Maven
+        run: |
+          mkdir -p ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30
+          AAR=$(find . -name "*.aar" | head -1)
+          if [ -n "$AAR" ]; then
+            cp "$AAR" ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.aar
+            cat > ~/.m2/repository/com/k2fsa/sherpa/onnx/sherpa-onnx/1.10.30/sherpa-onnx-1.10.30.pom << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <project>
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>com.k2fsa.sherpa.onnx</groupId>
+            <artifactId>sherpa-onnx</artifactId>
+            <version>1.10.30</version>
+            <packaging>aar</packaging>
+          </project>
+          EOF
+            echo "AAR installed successfully"
+          else
+            echo "No AAR found in release"
+          fi
+
+      - name: Add mavenLocal to settings
+        run: |
+          sed -i 's/repositories {/repositories {\n        mavenLocal()/' settings.gradle.kts
+
+      - name: Build Debug APK
+        run: gradle assembleDebug --stacktrace --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: cipher-debug-apk
+          path: app/build/outputs/apk/debug/*.apk

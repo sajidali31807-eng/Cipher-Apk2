@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Material3 Dark Theme for Cipher -->
+    <style name="Theme.Cipher" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:statusBarColor">#121828</item>
+        <item name="android:navigationBarColor">#090C15</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorPrimary">#00E5FF</item>
+        <item name="colorSecondary">#9D4EDD</item>
+    </style>
+
+    <!-- Splash Screen Theme -->
+    <style name="Theme.Cipher.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#121828</item>
+        <item name="postSplashScreenTheme">@style/Theme.Cipher</item>
+    </style>
+</resources>

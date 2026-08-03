@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <!-- 1. Background Canvas -->
+    <path
+        android:fillColor="#121828"
+        android:pathData="M0,0h512v512H0z" />
+
+    <!-- 2. Bottom Digital Hex Grid Accent -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.08"
+        android:pathData="M50,440 L80,425 L110,440 L110,470 L80,485 L50,470 Z M120,440 L150,425 L180,440 L180,470 L150,485 L120,470 Z M190,440 L220,425 L250,440 L250,470 L220,485 L190,470 Z M260,440 L290,425 L320,440 L320,470 L290,485 L260,470 Z M330,440 L360,425 L390,440 L390,470 L360,485 L330,470 Z M400,440 L430,425 L460,440 L460,470 L430,485 L400,470 Z" />
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.15"
+        android:pathData="M80,410 L150,410 M220,410 L290,410 M360,410 L430,410 M50,470 L460,470" />
+
+    <!-- 3. Purple Energy Aura Glow behind Helmet -->
+    <path
+        android:fillColor="#9D4EDD"
+        android:fillAlpha="0.18"
+        android:pathData="M256,80 C360,80 430,150 430,256 C430,360 360,430 256,430 C152,430 82,360 82,256 C82,150 152,80 256,80 Z" />
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.12"
+        android:pathData="M256,110 C330,110 390,170 390,256 C390,340 330,400 256,400 C182,400 122,340 122,256 C122,170 182,110 256,110 Z" />
+
+    <!-- 4. CIPHER Watermark Text Paths in Background -->
+    <!-- C -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M35,215 h65 v20 H58 v30 h42 v20 H35 Z" />
+    <!-- I -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M112,215 h20 v70 h-20 Z" />
+    <!-- P -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M142,215 h52 v40 h-32 v30 h-20 Z M162,230 v12 h18 v-12 Z" />
+    <!-- H -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M318,215 h20 v25 h24 v-25 h20 v70 h-20 v-25 h-24 v25 h-20 Z" />
+    <!-- E -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M392,215 h58 v18 H412 v10 h32 v16 H412 v10 h38 v16 H392 Z" />
+    <!-- R -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.28"
+        android:pathData="M460,215 h42 v32 h-14 l16,38 h-22 l-14,-32 h-8 v32 h-20 Z M480,229 v8 h12 v-8 Z" />
+
+    <!-- 5. Side Tech Circuit Accents -->
+    <!-- Left Side Tech -->
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.5"
+        android:strokeAlpha="0.6"
+        android:pathData="M40,256 L90,256 L115,280 M60,230 L95,230 L110,245 M70,282 L100,282" />
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M36,256 L42,252 L42,260 Z M56,230 A4,4 0 1,1 64,230 A4,4 0 1,1 56,230 M66,282 A4,4 0 1,1 74,282 A4,4 0 1,1 66,282" />
+
+    <!-- Right Side Tech -->
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.5"
+        android:strokeAlpha="0.6"
+        android:pathData="M472,256 L422,256 L397,280 M452,230 L417,230 L402,245 M442,282 L412,282" />
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M476,256 L470,252 L470,260 Z M448,230 A4,4 0 1,1 456,230 A4,4 0 1,1 448,230 M438,282 A4,4 0 1,1 446,282 A4,4 0 1,1 438,282" />
+
+    <!-- 6. CYBER SENTINEL HELMET (Dominant Main Subject) -->
+
+    <!-- Helmet Outer Shadow & Silhouette Base -->
+    <path
+        android:fillColor="#0A0F1E"
+        android:pathData="M256,82 L348,128 L386,215 L368,348 L312,422 L256,442 L200,422 L144,348 L126,215 L164,128 Z" />
+
+    <!-- Outer Armor Shell (Dark Steel Blue) -->
+    <path
+        android:fillColor="#1E2D4A"
+        android:pathData="M256,90 L342,133 L378,216 L360,342 L306,414 L256,434 L206,414 L152,342 L134,216 L170,133 Z" />
+
+    <!-- Helmet Crown/Forehead Crest Plate -->
+    <path
+        android:fillColor="#283A5E"
+        android:pathData="M256,90 L320,135 L296,180 L256,196 L216,180 L192,135 Z" />
+
+    <!-- Crown Crest Highlight Specular -->
+    <path
+        android:fillColor="#3C5482"
+        android:pathData="M256,90 L290,135 L275,170 L256,180 L237,170 L222,135 Z" />
+
+    <!-- Central Forehead Tech Emblem / Hex Core -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.9"
+        android:pathData="M256,130 L270,140 L270,158 L256,168 L242,158 L242,140 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M256,136 L264,142 L264,154 L256,160 L248,154 L248,142 Z" />
+
+    <!-- Left & Right Temple Plates -->
+    <path
+        android:fillColor="#16233B"
+        android:pathData="M170,133 L192,135 L216,180 L160,210 L134,216 Z" />
+    <path
+        android:fillColor="#20304E"
+        android:pathData="M342,133 L320,135 L296,180 L352,210 L378,216 Z" />
+
+    <!-- Upper Cheek Armor Plates -->
+    <path
+        android:fillColor="#1C2A44"
+        android:pathData="M134,216 L160,210 L200,230 L160,290 L138,270 Z" />
+    <path
+        android:fillColor="#2A3D63"
+        android:pathData="M378,216 L352,210 L312,230 L352,290 L374,270 Z" />
+
+    <!-- Lower Jaw & Mouth Guard Facets -->
+    <path
+        android:fillColor="#111B2C"
+        android:pathData="M160,290 L200,230 L256,270 L256,360 L206,414 L152,342 Z" />
+    <path
+        android:fillColor="#1B2942"
+        android:pathData="M352,290 L312,230 L256,270 L256,360 L306,414 L360,342 Z" />
+
+    <!-- Central Jaw Vent Grid -->
+    <path
+        android:fillColor="#0A0F1E"
+        android:pathData="M236,290 L276,290 L280,350 L256,375 L232,350 Z" />
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2"
+        android:strokeAlpha="0.7"
+        android:pathData="M242,305 L270,305 M240,320 L272,320 M242,335 L270,335 M248,350 L264,350" />
+
+    <!-- 7. VISOR SLIT (GLOWING ELECTRIC BLUE SLIT) -->
+
+    <!-- Visor Outer Glow Band -->
+    <path
+        android:fillColor="#00E5FF"
+        android:fillAlpha="0.3"
+        android:pathData="M152,220 L256,206 L360,220 L370,250 L256,265 L142,250 Z" />
+
+    <!-- Visor Primary Shell Cutout -->
+    <path
+        android:fillColor="#0A0F1E"
+        android:pathData="M160,224 L256,212 L352,224 L362,246 L256,258 L150,246 Z" />
+
+    <!-- Visor Main Glowing Bar (Sharp Angular Slit) -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M166,228 L256,218 L346,228 L356,242 L256,252 L156,242 Z" />
+
+    <!-- Visor Hot Center Core (Pure Cyan/White Intense Beam) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M180,231 L256,222 L332,231 L340,239 L256,247 L172,239 Z" />
+
+    <!-- Visor Laser Highlight Points -->
+    <path
+        android:fillColor="#00F5D4"
+        android:pathData="M220,230 L256,224 L292,230 L296,238 L256,244 L216,238 Z" />
+
+    <!-- 8. Armor Panel Seam Lines & Tech Detail -->
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="1.8"
+        android:strokeAlpha="0.65"
+        android:pathData="M256,90 L256,130 M216,180 L256,196 L296,180 M192,135 L242,140 M320,135 L270,140 M170,133 L134,216 M342,133 L378,216 M160,210 L166,228 M352,210 L346,228 M138,270 L160,290 M374,270 L352,290 M200,230 L236,290 M312,230 L276,290 M206,414 L232,350 M306,414 L280,350" />
+
+    <!-- Chin Tip Power Node -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M256,420 L264,428 L256,436 L248,428 Z" />
+
+</vector>
