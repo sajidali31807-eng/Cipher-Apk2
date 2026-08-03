@@ -59,7 +59,9 @@ jobs:
           sed -i 's/repositories {/repositories {\n        mavenLocal()/' settings.gradle.kts
 
       - name: Build Debug APK
-        run: gradle assembleDebug --stacktrace --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

@@ -45,7 +45,7 @@ export interface PermissionItem {
 
 export interface AccessibilityNode {
   id: string;
-  text: string;
+  text?: string;
   className: string;
   resourceId?: string;
   contentDescription?: string;
